@@ -5,12 +5,12 @@ import css from "./MovieModal.module.css";
 
 const modalRoot = document.getElementById("modal-root") as HTMLElement;
 
-interface Props {
+interface MovieModalProps {
   movie: Movie;
   onClose: () => void;
 }
 
-export default function MovieModal({ movie, onClose }: Props) {
+export default function MovieModal({ movie, onClose }: MovieModalProps) {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -19,9 +19,11 @@ export default function MovieModal({ movie, onClose }: Props) {
     };
 
     document.addEventListener("keydown", handleEsc);
+    document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
+      document.body.style.overflow = "auto";
     };
   }, [onClose]);
 

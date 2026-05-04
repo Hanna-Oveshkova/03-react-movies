@@ -3,10 +3,10 @@ import type { Movie } from "../types/movie";
 
 interface FetchMoviesResponse {
   results: Movie[];
-  tital_results: number;
+  total_results: number;
 }
 
-const TOKEN = import.meta.env.VITE_TMBD_TOKEN;
+const TOKEN = import.meta.env.VITE_TMDB_TOKEN;
 
 export const fetchMovies = async (query: string): Promise<Movie[]> => {
   const response = await axios.get<FetchMoviesResponse>(
@@ -22,20 +22,3 @@ export const fetchMovies = async (query: string): Promise<Movie[]> => {
   );
   return response.data.results;
 };
-
-// const BASE_URL = "https://api.themoviedb.org/3/search/movie";
-// const TOKEN = import.meta.env.VITE_TMBD_TOKEN;
-
-// export async function fetchMovies(query: string): Promise<Movie[]> {
-//   const config = {
-//     params: { query },
-//     headers: {
-//       Authorization: `Bearer ${TOKEN}`,
-//     },
-//   };
-//   const response: AxiosResponse<{ results: Movie[] }> = await axios.get(
-//     BASE_URL,
-//     config,
-//   );
-//   return response.data.results;
-// }
